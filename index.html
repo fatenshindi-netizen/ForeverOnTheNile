@@ -2,257 +2,630 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forever on the Nile</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Forever on the Nile — Ahmed & Judy</title>
+<meta name="description" content="Join Ahmed & Judy for an evening cruise wedding celebration on the Nile — Wednesday, 22 July 2026, Nile Lotus, Maadi.">
+<meta property="og:title" content="Forever on the Nile — Ahmed & Judy">
+<meta property="og:description" content="An evening cruise wedding celebration on the Nile. Wednesday, 22 July 2026, 7:30 PM, Nile Lotus, Maadi.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#070605">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Marcellus&family=EB+Garamond:ital@0;1&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --black: #070605;
+    --black-2: #0d0b09;
+    --gold: #cda45e;
+    --gold-bright: #f2d795;
+    --gold-deep: #8a6a2e;
+    --gold-line: rgba(205,164,94,0.35);
+    --parchment: #e9dfc9;
+    --parchment-dim: rgba(233,223,201,0.65);
+  }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
 
-body{
+  body{
+    margin:0;
+    background: var(--black);
+    color: var(--parchment);
+    font-family: 'EB Garamond', serif;
+    overflow-x: hidden;
+  }
 
-font-family:'Cinzel',serif;
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
 
-background:#081421;
+  ::selection{ background: var(--gold-deep); color: var(--black); }
+  a{ color: inherit; }
+  img{ max-width: 100%; }
 
-color:white;
+  .eyebrow{ font-family: 'Marcellus', serif; letter-spacing: 0.35em; text-transform: uppercase; font-size: 0.72rem; color: var(--gold); opacity: 0.85; }
+  .divider{ width: 1px; height: 46px; margin: 22px auto; background: linear-gradient(to bottom, transparent, var(--gold), transparent); }
+  .divider-h{ width: 60px; height: 1px; margin: 18px auto; background: linear-gradient(to right, transparent, var(--gold), transparent); }
 
-overflow-x:hidden;
+  /* ---------- Backgrounds ---------- */
+  .nile-bg{ position: fixed; inset: 0; z-index: -3;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(205,164,94,0.10), transparent 55%),
+      linear-gradient(180deg, var(--black) 0%, var(--black-2) 55%, var(--black) 100%);
+  }
+  #particles{ position: fixed; inset: 0; z-index: -2; pointer-events: none; opacity: 0.55; }
+  .ripple-layer{ position: fixed; left: 0; right: 0; bottom: 0; height: 46vh; z-index: -1; pointer-events: none; opacity: 0.5;
+    background: repeating-linear-gradient(100deg, transparent 0px, transparent 60px, rgba(205,164,94,0.05) 62px, transparent 64px, transparent 140px);
+    animation: rippleShift 14s linear infinite;
+    -webkit-mask-image: linear-gradient(to top, black, transparent);
+    mask-image: linear-gradient(to top, black, transparent);
+  }
+  @keyframes rippleShift{ 0%{ background-position-x: 0; } 100%{ background-position-x: 400px; } }
 
-}
+  /* ---------- Cinematic intro ---------- */
+  #intro{ position: fixed; inset: 0; z-index: 999; background: #000; display: flex; align-items: center; justify-content: center; text-align: center; transition: opacity 1.4s ease; }
+  #intro.hide{ opacity: 0; pointer-events: none; }
+  #intro .intro-line{ position: absolute; font-family: 'Cormorant Garamond', serif; color: var(--gold-bright); opacity: 0;
+    text-shadow: 0 0 18px rgba(242,215,149,0.55), 0 0 40px rgba(205,164,94,0.25); letter-spacing: 0.04em; padding: 0 8vw; }
+  #intro .names{ font-size: clamp(2.2rem, 8vw, 4rem); font-weight: 500; animation: introNames 4s ease forwards; }
+  #intro .tagline{ font-size: clamp(1.6rem, 6vw, 3rem); font-style: italic; animation: introTagline 4s ease forwards; }
+  @keyframes introNames{ 0%{ opacity: 0; transform: translateY(8px) scale(0.98); } 12%{ opacity: 1; transform: translateY(0) scale(1); } 45%{ opacity: 1; } 58%{ opacity: 0; } 100%{ opacity: 0; } }
+  @keyframes introTagline{ 0%{ opacity: 0; } 58%{ opacity: 0; transform: translateY(8px); } 70%{ opacity: 1; transform: translateY(0); } 92%{ opacity: 1; } 100%{ opacity: 0; } }
+  #intro .skip{ position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); font-family: 'Marcellus', serif; font-size: 0.68rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--parchment-dim); background: none; border: 1px solid var(--gold-line); padding: 10px 20px; cursor: pointer; opacity: 0.8; }
+  #intro .skip:hover{ opacity: 1; border-color: var(--gold-bright); }
+  body.intro-active{ overflow: hidden; height: 100vh; }
 
-.hero{
+  /* ---------- HERO ---------- */
+  .hero{ position: relative; min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 6vh 6vw; isolation: isolate; }
+  .hero::before{ content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 20%, rgba(205,164,94,0.16), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 85%, rgba(205,164,94,0.08), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 85%, rgba(205,164,94,0.08), transparent 60%);
+    z-index: -1; }
+  .hero-glyph{ width: 34px; height: 34px; margin-bottom: 18px; opacity: 0.9; animation: glyphGlow 5s ease-in-out infinite; }
+  @keyframes glyphGlow{ 0%,100%{ filter: drop-shadow(0 0 2px rgba(242,215,149,0.3)); } 50%{ filter: drop-shadow(0 0 10px rgba(242,215,149,0.65)); } }
+  .hero-title{ font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(2.6rem, 9vw, 5.6rem); line-height: 1.05; margin: 6px 0 2px;
+    background: linear-gradient(100deg, #a9812f 0%, var(--gold-bright) 25%, #fff3d1 45%, var(--gold-bright) 65%, #a9812f 100%);
+    background-size: 220% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 7s linear infinite; letter-spacing: 0.01em; }
+  @keyframes shine{ to{ background-position: -220% center; } }
+  .hero-sub{ font-family: 'Marcellus', serif; font-size: clamp(0.85rem, 2vw, 1rem); letter-spacing: 0.28em; text-transform: uppercase; color: var(--parchment-dim); margin-top: 6px; }
+  .hero-names{ font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.6rem, 4vw, 2.4rem); color: var(--gold-bright); margin: 26px 0 4px; }
+  .hero-date{ font-family: 'Marcellus', serif; font-size: 0.85rem; letter-spacing: 0.18em; color: var(--parchment-dim); text-transform: uppercase; }
 
-min-height:100vh;
+  .begin-btn{ position: relative; margin-top: 46px; padding: 16px 46px; font-family: 'Marcellus', serif; font-size: 0.82rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--black); background: linear-gradient(100deg, #a9812f, var(--gold-bright), #a9812f); background-size: 250% auto; border: none; border-radius: 2px; cursor: pointer; overflow: hidden;
+    text-decoration: none; display: inline-block; animation: shine 6s linear infinite; transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 0 0 1px rgba(205,164,94,0.5), 0 10px 30px rgba(205,164,94,0.15); }
+  .begin-btn:hover{ transform: translateY(-3px) scale(1.02); box-shadow: 0 0 0 1px var(--gold-bright), 0 18px 46px rgba(205,164,94,0.4); }
+  .begin-btn:focus-visible{ outline: 2px solid var(--gold-bright); outline-offset: 4px; }
+  .begin-btn::after{ content:""; position:absolute; top:0; left:-60%; width: 40%; height: 100%; background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+    transform: skewX(-20deg); animation: sweep 3.2s ease-in-out infinite; }
+  @keyframes sweep{ 0%{ left: -60%; } 40%,100%{ left: 130%; } }
 
-background:
-linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.70)),
-url('images/invitation.jpg');
+  .scroll-cue{ position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: 1px; height: 50px; background: linear-gradient(to bottom, transparent, var(--gold)); }
+  .scroll-cue::after{ content:""; position:absolute; left: 50%; top:0; width: 5px; height: 5px; background: var(--gold-bright); border-radius: 50%; transform: translateX(-50%); animation: dropFall 2.4s ease-in-out infinite; }
+  @keyframes dropFall{ 0%{ top:0; opacity:0; } 20%{ opacity:1; } 90%{ opacity:1; } 100%{ top: 46px; opacity:0; } }
 
-background-size:cover;
+  /* ---------- SECTIONS ---------- */
+  section{ position: relative; padding: 10vh 6vw; max-width: 860px; margin: 0 auto; }
+  .section-head{ text-align: center; margin-bottom: 46px; }
+  .section-title{ font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-bright); margin: 8px 0; }
+  .reveal{ opacity: 0; transform: translateY(34px); transition: opacity 1s ease, transform 1s ease; }
+  .reveal.is-visible{ opacity: 1; transform: translateY(0); }
 
-background-position:center;
+  /* Invitation */
+  .invite-frame{ position: relative; border: 1px solid var(--gold-line); padding: 10px; background: linear-gradient(180deg, rgba(205,164,94,0.04), transparent); touch-action: pinch-zoom; }
+  .invite-frame::before{ content:""; position:absolute; inset: 6px; border: 1px solid rgba(205,164,94,0.25); pointer-events:none; }
+  .invite-frame img{ display:block; width: 100%; height: auto; filter: sepia(6%) saturate(105%); opacity: 0; transition: opacity 1.1s ease; }
+  .invite-frame img.loaded{ opacity: 1; }
+  .invite-caption{ text-align:center; font-family:'Marcellus', serif; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--parchment-dim); margin-top: 18px; }
 
-display:flex;
+  /* Details */
+  .details-card{ border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); padding: 44px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; text-align: center; }
+  .detail-item .label{ font-family: 'Marcellus', serif; font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .detail-item .value{ font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--parchment); }
+  .detail-item .value small{ display:block; font-family:'EB Garamond', serif; font-size: 0.95rem; color: var(--parchment-dim); margin-top: 4px; }
 
-justify-content:center;
+  /* Countdown */
+  .countdown{ display:flex; justify-content:center; gap: 16px; flex-wrap: wrap; }
+  .countdown .cd-card{ min-width: 80px; padding: 18px 10px; text-align:center; border: 1px solid var(--gold-line); background: linear-gradient(180deg, rgba(205,164,94,0.06), transparent); }
+  .countdown .cd-num{ font-family:'Cormorant Garamond', serif; font-size: 2.1rem; color: var(--gold-bright); }
+  .countdown .cd-label{ font-family:'Marcellus', serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--parchment-dim); margin-top: 4px; }
 
-align-items:center;
+  /* Couple image */
+  .couple-wrap{ display:flex; justify-content:center; }
+  .couple-frame{ position: relative; width: min(420px, 100%); aspect-ratio: 4/5; overflow: hidden; border: 1px solid var(--gold-line); box-shadow: 0 0 40px rgba(205,164,94,0.12); }
+  .couple-frame img{ width:100%; height:100%; object-fit: cover; object-position: top; filter: saturate(102%); transition: transform 9s ease; }
+  .couple-frame:hover img{ transform: scale(1.08); }
+  .couple-frame::after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, transparent 60%, rgba(7,6,5,0.75) 100%); pointer-events:none; }
+  .couple-names{ position:absolute; left:0; right:0; bottom: 18px; text-align:center; font-family:'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: var(--gold-bright); z-index: 1; }
 
-text-align:center;
+  /* Gallery */
+  .gallery{ display:flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 14px; -webkit-overflow-scrolling: touch; }
+  .gallery::-webkit-scrollbar{ height: 4px; }
+  .gallery::-webkit-scrollbar-thumb{ background: var(--gold-line); }
+  .gallery-item{ flex: 0 0 78%; max-width: 320px; scroll-snap-align: center; border: 1px solid var(--gold-line); overflow: hidden; aspect-ratio: 4/3; }
+  .gallery-item img{ width:100%; height:100%; object-fit: cover; }
+  .gallery-dots{ display:flex; justify-content:center; gap: 8px; margin-top: 10px; }
+  .gallery-dots span{ width: 6px; height: 6px; border-radius: 50%; background: var(--gold-line); }
 
-padding:30px;
+  /* Music player */
+  .player{ border: 1px solid var(--gold-line); padding: 26px 24px; background: linear-gradient(180deg, rgba(205,164,94,0.05), transparent); }
+  .player-title{ font-family:'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: var(--gold-bright); text-align:center; margin-bottom: 16px; }
+  .player-controls{ display:flex; align-items:center; gap: 16px; }
+  .play-btn{ width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--gold); background: transparent; color: var(--gold-bright); font-size: 1rem; cursor: pointer;
+    display:flex; align-items:center; justify-content:center; flex-shrink: 0; transition: background 0.3s ease, transform 0.3s ease; }
+  .play-btn:hover{ background: rgba(205,164,94,0.15); transform: scale(1.05); }
+  .play-btn:focus-visible{ outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+  .seek-wrap{ flex:1; display:flex; flex-direction: column; gap: 6px; }
+  .seek-bar{ position: relative; height: 3px; background: rgba(205,164,94,0.2); cursor: pointer; }
+  .seek-fill{ position:absolute; left:0; top:0; height:100%; width:0%; background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright)); }
+  .seek-bar input[type=range]{ -webkit-appearance: none; appearance: none; position:absolute; inset: -8px 0; width: 100%; height: 19px; background: transparent; margin: 0; cursor: pointer; }
+  .seek-bar input[type=range]::-webkit-slider-thumb{ -webkit-appearance: none; width: 11px; height: 11px; border-radius: 50%; background: var(--gold-bright); box-shadow: 0 0 6px rgba(242,215,149,0.8); margin-top: 0; }
+  .time-row{ display:flex; justify-content:space-between; font-family:'Marcellus', serif; font-size: 0.65rem; letter-spacing: 0.05em; color: var(--parchment-dim); }
 
-}
+  /* Lyrics */
+  .lyrics-box{ max-height: 60vh; overflow-y: auto; padding: 10px 6px; scroll-behavior: smooth; }
+  .lyric-line{ text-align:center; padding: 18px 0; opacity: 0.35; transition: opacity 0.6s ease, color 0.6s ease, transform 0.6s ease; transform: translateY(4px); }
+  .lyric-line.active{ opacity: 1; transform: translateY(0); }
+  .lyric-line .en{ font-family:'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--parchment); }
+  .lyric-line.active .en{ color: var(--gold-bright); text-shadow: 0 0 14px rgba(242,215,149,0.35); }
+  .lyric-line .ar{ font-family:'Aref Ruqaa', serif; direction: rtl; font-size: 1.15rem; color: var(--parchment-dim); margin-top: 6px; }
+  .lyric-line.active .ar{ color: var(--gold); }
+  .lyric-sep{ width: 34px; height: 1px; margin: 0 auto; background: var(--gold-line); }
 
-.content{
+  /* Guest book */
+  .wish-form{ display:flex; flex-direction: column; gap: 12px; max-width: 460px; margin: 0 auto 34px; }
+  .wish-form input, .wish-form textarea{ background: rgba(255,255,255,0.02); border: 1px solid var(--gold-line); color: var(--parchment);
+    font-family: 'EB Garamond', serif; font-size: 1rem; padding: 12px 14px; resize: vertical; }
+  .wish-form input:focus, .wish-form textarea:focus{ outline: none; border-color: var(--gold-bright); }
+  .wish-form button{ align-self: center; margin-top: 4px; padding: 12px 34px; font-family:'Marcellus', serif; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--black); background: linear-gradient(100deg, #a9812f, var(--gold-bright), #a9812f); border: none; cursor: pointer; }
+  .wish-form button:focus-visible{ outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+  .wish-list{ display:flex; flex-direction: column; gap: 16px; max-width: 560px; margin: 0 auto; }
+  .wish-item{ border-left: 2px solid var(--gold-line); padding: 6px 0 6px 16px; }
+  .wish-item .wish-name{ font-family:'Marcellus', serif; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; }
+  .wish-item .wish-msg{ font-family:'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--parchment); margin-top: 4px; }
+  .wish-empty{ text-align:center; color: var(--parchment-dim); font-style: italic; }
 
-max-width:700px;
+  /* Thank you */
+  .thankyou{ text-align:center; }
+  .thankyou p{ font-family:'Cormorant Garamond', serif; font-size: 1.3rem; line-height: 1.7; color: var(--parchment); max-width: 520px; margin: 0 auto; }
 
-}
+  /* Footer */
+  footer{ text-align:center; padding: 8vh 6vw 7vh; border-top: 1px solid var(--gold-line); }
+  .footer-crafted{ font-family:'Marcellus', serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--parchment-dim); margin-bottom: 14px; }
+  .footer-ar{ font-family: 'Aref Ruqaa', serif; font-size: clamp(1.6rem, 4vw, 2.2rem); color: var(--gold-bright); direction: rtl; margin-bottom: 6px; }
+  .footer-en{ font-family:'Marcellus', serif; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--parchment-dim); }
 
-.small{
+  /* QR button + modal */
+  .qr-fab{ position: fixed; right: 18px; bottom: 18px; z-index: 60; width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(--gold);
+    background: rgba(7,6,5,0.85); backdrop-filter: blur(4px); color: var(--gold-bright); display:flex; align-items:center; justify-content:center; cursor: pointer; font-size: 1.3rem;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.5); }
+  .qr-fab:hover{ background: rgba(205,164,94,0.15); }
+  .qr-fab:focus-visible{ outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+  .qr-modal{ position: fixed; inset: 0; z-index: 70; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,0.82); padding: 20px; }
+  .qr-modal.open{ display:flex; }
+  .qr-card{ background: var(--black-2); border: 1px solid var(--gold-line); padding: 32px 28px; text-align:center; max-width: 300px; width: 100%; }
+  .qr-card img{ width: 200px; height: 200px; margin: 0 auto 14px; background: #fff; padding: 8px; }
+  .qr-card p{ font-family:'Marcellus', serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--parchment-dim); }
+  .qr-close{ margin-top: 16px; background: none; border: 1px solid var(--gold-line); color: var(--parchment-dim); font-family:'Marcellus', serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 8px 20px; cursor: pointer; }
+  .qr-close:hover{ border-color: var(--gold-bright); color: var(--gold-bright); }
 
-font-size:18px;
-
-letter-spacing:3px;
-
-color:#e7d2a2;
-
-margin-bottom:15px;
-
-}
-
-h1{
-
-font-size:56px;
-
-margin-bottom:15px;
-
-}
-
-.names{
-
-font-size:34px;
-
-color:#f7df9d;
-
-margin-bottom:25px;
-
-}
-
-.details{
-
-font-size:22px;
-
-line-height:1.8;
-
-}
-
-button{
-
-margin-top:40px;
-
-padding:18px 45px;
-
-font-size:20px;
-
-border:none;
-
-border-radius:50px;
-
-background:#d4af37;
-
-color:#111;
-
-cursor:pointer;
-
-font-weight:bold;
-
-}
-
-button:hover{
-
-transform:scale(1.05);
-
-}
-
+  @media (max-width: 640px){
+    .details-card{ grid-template-columns: 1fr; gap: 26px; }
+    .countdown .cd-card{ min-width: 68px; padding: 14px 6px; }
+  }
 </style>
-
 </head>
+<body class="intro-active">
 
-<body>
+<div id="intro" role="dialog" aria-label="Opening cinematic">
+  <p class="intro-line names">Ahmed &amp; Judy</p>
+  <p class="intro-line tagline">Forever on the Nile</p>
+  <button class="skip" id="skipIntro">Skip</button>
+</div>
+
+<div class="nile-bg" aria-hidden="true"></div>
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="ripple-layer" aria-hidden="true"></div>
 
 <section class="hero">
-
-<div class="content">
-
-<div class="small">
-
-✨ Welcome Aboard Nile Lotus ✨
-
-</div>
-
-<h1>
-
-Forever on the Nile
-
-</h1>
-
-<div class="names">
-
-Ahmed &amp; Judy
-
-</div>
-
-<div class="details">
-
-22 July 2026
-
-<br><br>
-
-Nile Lotus
-
-<br><br>
-
-7:30 PM
-
-</div>
-
-<button>
-
-Begin Our Story
-
-</button>
-
-</div>
-
-</section>
-<section style="background:#0f1d2e;padding:60px 20px;text-align:center;">
-
-<h2 style="font-size:40px;color:#d4af37;margin-bottom:20px;">
-Our Invitation
-</h2>
-
-<img src="images/invitation.jpg"
-style="width:90%;max-width:700px;border-radius:20px;box-shadow:0 0 30px rgba(212,175,55,.35);">
-
-<br><br><br>
-
-<h2 style="font-size:36px;color:#d4af37;">
-🎵 Forever on the Nile
-</h2>
-
-<p style="font-family:Cairo,sans-serif;font-size:22px;margin:20px 0 30px;">
-اضغط تشغيل واستمتع بالأغنية الخاصة بالعروسين
-</p>
-
-<audio controls style="width:90%;max-width:700px;">
-<source src="song.mp3" type="audio/mpeg">
-متصفحك لا يدعم تشغيل الصوت.
-</audio>
-
+  <svg class="hero-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 2C9 6 6 8 6 12c0 3.3 2.7 6 6 6s6-2.7 6-6c0-4-3-6-6-10z" stroke="#cda45e" stroke-width="1"/>
+    <circle cx="12" cy="13" r="2" stroke="#f2d795" stroke-width="0.8"/>
+  </svg>
+  <p class="eyebrow">Welcome Aboard Nile Lotus</p>
+  <h1 class="hero-title">Forever on the Nile</h1>
+  <p class="hero-sub">Where Two Hearts Become One</p>
+  <p class="hero-names">Ahmed &amp; Judy</p>
+  <p class="hero-date">Wednesday · 22 July 2026 · 7:30 PM</p>
+  <a href="#story" class="begin-btn">Begin Our Story</a>
+  <div class="scroll-cue" aria-hidden="true"></div>
 </section>
 
-<section style="background:#081421;padding:70px 20px;text-align:center;">
-
-<h2 style="font-size:40px;color:#d4af37;margin-bottom:30px;">
-
-Ahmed ❤️ Judy
-
-</h2>
-
-<img src="images/couple.jpg"
-style="width:90%;max-width:700px;border-radius:25px;box-shadow:0 0 35px rgba(212,175,55,.35);">
-
-<p style="font-family:Cairo,sans-serif;font-size:28px;line-height:2;margin-top:40px;color:#ffffff;">
-
-Every love story is beautiful...<br>
-
-But this one is our favorite.
-
-</p>
-
+<section id="story">
+  <div class="section-head reveal">
+    <p class="eyebrow">Our Invitation</p>
+    <h2 class="section-title">You Are Invited</h2>
+    <div class="divider-h"></div>
+  </div>
+  <div class="invite-frame reveal">
+    <img id="inviteImg" src="images/invitation.jpg" alt="Wedding invitation for Ahmed and Judy aboard Nile Lotus" loading="lazy">
+  </div>
+  <p class="invite-caption reveal">With love and gratitude, we invite you to celebrate with us</p>
 </section>
-<section style="background:#111827;padding:80px 20px;text-align:center;">
 
-<h2 style="font-size:42px;color:#d4af37;margin-bottom:20px;">
-Thank You
-</h2>
+<section id="details">
+  <div class="section-head reveal">
+    <p class="eyebrow">Wedding Celebration</p>
+    <h2 class="section-title">Details of the Evening</h2>
+    <div class="divider-h"></div>
+  </div>
+  <div class="details-card reveal">
+    <div class="detail-item"><div class="label">Date</div><div class="value">22 July<small>Wednesday, 2026</small></div></div>
+    <div class="detail-item"><div class="label">Time</div><div class="value">7:30 PM<small>Evening reception</small></div></div>
+    <div class="detail-item"><div class="label">Venue</div><div class="value">Nile Lotus<small>Maadi</small></div></div>
+  </div>
+</section>
 
-<p style="font-family:Cairo,sans-serif;font-size:26px;line-height:2;color:#f5f5f5;max-width:800px;margin:auto;">
+<section id="countdown-section">
+  <div class="section-head reveal">
+    <p class="eyebrow">Almost There</p>
+    <h2 class="section-title">Counting Down</h2>
+    <div class="divider-h"></div>
+  </div>
+  <div class="countdown reveal" id="countdown" aria-live="polite">
+    <div class="cd-card"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Days</div></div>
+    <div class="cd-card"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
+    <div class="cd-card"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Minutes</div></div>
+    <div class="cd-card"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seconds</div></div>
+  </div>
+</section>
 
-Thank you for celebrating this beautiful beginning with us.
+<section id="couple">
+  <div class="section-head reveal">
+    <p class="eyebrow">Together</p>
+    <h2 class="section-title">Ahmed &amp; Judy</h2>
+    <div class="divider-h"></div>
+  </div>
+  <div class="couple-wrap reveal">
+    <div class="couple-frame">
+      <img src="images/couple.jpg" alt="Ahmed and Judy" loading="lazy">
+      <div class="couple-names">A &amp; J</div>
+    </div>
+  </div>
+</section>
 
-May your love grow deeper with every sunrise,
-and your happiness shine brighter with every sunset.
+<section id="gallery-section">
+  <div class="section-head reveal">
+    <p class="eyebrow">Moments</p>
+    <h2 class="section-title">A Few Frames</h2>
+    <div class="divider-h"></div>
+  </div>
+  <div class="gallery reveal" id="gallery">
+    <div class="gallery-item"><img src="images/gallery1.jpg" alt="Gallery photo 1" loading="lazy"></div>
+    <div class="gallery-item"><img src="images/gallery2.jpg" alt="Gallery photo 2" loading="lazy"></div>
+    <div class="gallery-item"><img src="images/gallery3.jpg" alt="Gallery photo 3" loading="lazy"></div>
+    <div class="gallery-item"><img src="images/gallery4.jpg" alt="Gallery photo 4" loading="lazy"></div>
+  </div>
+  <div class="gallery-dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+</section>
 
-</p>
+<section id="music">
+  <div class="section-head reveal">
+    <p class="eyebrow">Our Song</p>
+    <h2 class="section-title">A Melody for the Evening</h2>
+    <div class="divider-h"></div>
+  </div>
 
-<div style="margin-top:60px;border-top:1px solid rgba(212,175,55,.35);padding-top:35px;">
+  <div class="player reveal">
+    <p class="player-title">Forever on the Nile</p>
+    <div class="player-controls">
+      <button class="play-btn" id="playBtn" aria-label="Play song">&#9658;</button>
+      <div class="seek-wrap">
+        <div class="seek-bar" id="seekBar">
+          <div class="seek-fill" id="seekFill"></div>
+          <input type="range" id="seekInput" min="0" max="100" value="0" aria-label="Seek song position">
+        </div>
+        <div class="time-row"><span id="curTime">0:00</span><span id="durTime">0:00</span></div>
+      </div>
+    </div>
+    <audio id="song" preload="none">
+      <source src="song.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
 
-<p style="font-family:Cairo,sans-serif;font-size:34px;color:#d4af37;font-weight:bold;">
+  <div class="section-head reveal" style="margin-top:70px;">
+    <p class="eyebrow">Lyrics</p>
+    <h2 class="section-title">Forever on the Nile</h2>
+    <div class="divider-h"></div>
+  </div>
+  <div class="lyrics-box reveal" id="lyricsBox"></div>
+</section>
 
-لروحكم السعادة
+<section id="guestbook">
+  <div class="section-head reveal">
+    <p class="eyebrow">For The Couple</p>
+    <h2 class="section-title">Leave a Wish</h2>
+    <div class="divider-h"></div>
+  </div>
+  <form class="wish-form reveal" id="wishForm">
+    <input type="text" id="wishName" placeholder="Your name" required maxlength="40">
+    <textarea id="wishMsg" rows="3" placeholder="Write your wish for Ahmed & Judy..." required maxlength="300"></textarea>
+    <button type="submit">Leave a Wish</button>
+  </form>
+  <div class="wish-list reveal" id="wishList"></div>
+</section>
 
-</p>
+<section id="thankyou" class="thankyou">
+  <div class="section-head reveal">
+    <p class="eyebrow">With Love</p>
+    <h2 class="section-title">Thank You</h2>
+    <div class="divider-h"></div>
+  </div>
+  <p class="reveal">Thank you for celebrating this beautiful beginning with us.<br>May your love always flow as gracefully as the Nile.</p>
+</section>
 
-<p style="font-family:Cairo,sans-serif;font-size:24px;color:white;margin-top:12px;">
+<footer>
+  <p class="footer-crafted">Crafted with love</p>
+  <p class="footer-ar">لروحكم السعادة</p>
+  <div class="divider"></div>
+  <p class="footer-en">فاتن خطاب</p>
+</footer>
 
-فاتن خطاب
-
-</p>
-
+<button class="qr-fab" id="qrFab" aria-label="Show QR code to this website">▦</button>
+<div class="qr-modal" id="qrModal" role="dialog" aria-label="QR code">
+  <div class="qr-card">
+    <img id="qrImg" alt="QR code linking to this website" loading="lazy">
+    <p>Scan to relive our story</p>
+    <button class="qr-close" id="qrClose">Close</button>
+  </div>
 </div>
 
-</section>
+<script>
+(function(){
+  "use strict";
+
+  var intro = document.getElementById('intro');
+  var body = document.body;
+  var introDismissed = false;
+  function dismissIntro(){
+    if (introDismissed) return;
+    introDismissed = true;
+    intro.classList.add('hide');
+    body.classList.remove('intro-active');
+    setTimeout(function(){ intro.style.display = 'none'; }, 1500);
+  }
+  document.getElementById('skipIntro').addEventListener('click', dismissIntro);
+  var introTimer = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 300 : 4300;
+  setTimeout(dismissIntro, introTimer);
+
+  var revealEls = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){ entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(function(el){ io.observe(el); });
+
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor){
+    anchor.addEventListener('click', function(e){
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target){ e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  var inviteImg = document.getElementById('inviteImg');
+  function markLoaded(){ inviteImg.classList.add('loaded'); }
+  if (inviteImg.complete && inviteImg.naturalWidth > 0){ markLoaded(); }
+  else { inviteImg.addEventListener('load', markLoaded); inviteImg.addEventListener('error', markLoaded); }
+
+  var canvas = document.getElementById('particles');
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  function initParticles(){
+    var count = window.innerWidth < 640 ? 24 : 42;
+    particles = [];
+    for (var i = 0; i < count; i++){
+      particles.push({
+        x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+        r: Math.random() * 1.6 + 0.4, speed: Math.random() * 0.18 + 0.04,
+        drift: Math.random() * 0.3 - 0.15, alpha: Math.random() * 0.4 + 0.15
+      });
+    }
+  }
+  function drawParticles(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(function(p){
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(242,215,149,' + p.alpha + ')'; ctx.fill();
+      p.y -= p.speed; p.x += p.drift * 0.05;
+      if (p.y < -4){ p.y = canvas.height + 4; p.x = Math.random() * canvas.width; }
+    });
+    if (!reduceMotion){ requestAnimationFrame(drawParticles); }
+  }
+  resizeCanvas(); initParticles();
+  window.addEventListener('resize', function(){ resizeCanvas(); initParticles(); });
+  if (!reduceMotion){ requestAnimationFrame(drawParticles); } else { drawParticles(); }
+
+  var weddingDate = new Date('2026-07-22T19:30:00');
+  function updateCountdown(){
+    var now = new Date();
+    var diff = weddingDate - now;
+    if (diff < 0) diff = 0;
+    var days = Math.floor(diff / 86400000);
+    var hours = Math.floor((diff % 86400000) / 3600000);
+    var mins = Math.floor((diff % 3600000) / 60000);
+    var secs = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  var audio = document.getElementById('song');
+  var playBtn = document.getElementById('playBtn');
+  var seekInput = document.getElementById('seekInput');
+  var seekFill = document.getElementById('seekFill');
+  var curTime = document.getElementById('curTime');
+  var durTime = document.getElementById('durTime');
+
+  function formatTime(t){
+    if (!isFinite(t)) return '0:00';
+    var m = Math.floor(t / 60);
+    var s = Math.floor(t % 60);
+    return m + ':' + String(s).padStart(2, '0');
+  }
+
+  playBtn.addEventListener('click', function(){
+    if (audio.paused){
+      audio.play();
+      playBtn.innerHTML = '&#10074;&#10074;';
+      playBtn.setAttribute('aria-label', 'Pause song');
+    } else {
+      audio.pause();
+      playBtn.innerHTML = '&#9658;';
+      playBtn.setAttribute('aria-label', 'Play song');
+    }
+  });
+
+  audio.addEventListener('loadedmetadata', function(){ durTime.textContent = formatTime(audio.duration); });
+  audio.addEventListener('timeupdate', function(){
+    var pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+    seekInput.value = pct;
+    seekFill.style.width = pct + '%';
+    curTime.textContent = formatTime(audio.currentTime);
+    syncLyrics(audio.currentTime);
+  });
+  audio.addEventListener('ended', function(){
+    playBtn.innerHTML = '&#9658;';
+    playBtn.setAttribute('aria-label', 'Play song');
+  });
+  seekInput.addEventListener('input', function(){
+    if (audio.duration){ audio.currentTime = (seekInput.value / 100) * audio.duration; }
+  });
+
+  /* Original lyrics + Arabic translation, timed across the ~6:03 track.
+     Adjust the "t" (seconds) values if you'd like the highlight to track the words more precisely. */
+  var lyrics = [
+    { t: 8,   en: "By the water's edge, our story starts to glow",  ar: "على ضفاف النيل تبدأ حكايتنا تتوهّج" },
+    { t: 32,  en: "Golden light on the river, soft and slow",        ar: "ضوء ذهبي على النهر، هادئ وبطيء" },
+    { t: 56,  en: "Two hearts drifting where the current flows",     ar: "قلبان يسيران حيث يجري التيار" },
+    { t: 80,  en: "Forever on the Nile, this is where love grows",   ar: "إلى الأبد على النيل، هنا يكبر الحب" },
+    { t: 104, en: "Every star above is a promise made",              ar: "كل نجمة في الأعلى وعد قُطع" },
+    { t: 128, en: "In the quiet evening, our vows won't fade",       ar: "في هدوء المساء، عهودنا لن تخبو" },
+    { t: 152, en: "Hand in hand beneath the lantern light",           ar: "يداً بيد تحت ضوء الفانوس" },
+    { t: 176, en: "Sailing softly into forever tonight",              ar: "نُبحر برفق نحو الأبد الليلة" },
+    { t: 200, en: "Forever on the Nile, my love and I",               ar: "إلى الأبد على النيل، أنا وحبيبي" },
+    { t: 224, en: "Under this endless, star-filled sky",              ar: "تحت هذه السماء اللامتناهية المرصّعة بالنجوم" },
+    { t: 248, en: "Every ripple carries a wish we made",               ar: "كل موجة تحمل أمنية تمنّيناها" },
+    { t: 272, en: "Two names, one journey, never to fade",             ar: "اسمان، رحلة واحدة، لن تخبو أبداً" },
+    { t: 296, en: "Forever on the Nile, hand in hand we stay",          ar: "إلى الأبد على النيل، يداً بيد نبقى" },
+    { t: 320, en: "Our forever begins from this very day",              ar: "أبدنا يبدأ من هذا اليوم بالذات" }
+  ];
+
+  var lyricsBox = document.getElementById('lyricsBox');
+  lyrics.forEach(function(line, idx){
+    var div = document.createElement('div');
+    div.className = 'lyric-line';
+    div.dataset.time = line.t;
+    div.innerHTML = '<div class="en">' + line.en + '</div><div class="ar">' + line.ar + '</div>';
+    lyricsBox.appendChild(div);
+    if (idx < lyrics.length - 1){
+      var sep = document.createElement('div');
+      sep.className = 'lyric-sep';
+      lyricsBox.appendChild(sep);
+    }
+  });
+
+  var lyricEls = lyricsBox.querySelectorAll('.lyric-line');
+  var activeIdx = -1;
+  function syncLyrics(currentTime){
+    var newIdx = -1;
+    for (var i = 0; i < lyrics.length; i++){ if (currentTime >= lyrics[i].t) newIdx = i; }
+    if (newIdx !== activeIdx){
+      activeIdx = newIdx;
+      lyricEls.forEach(function(el){ el.classList.remove('active'); });
+      if (activeIdx >= 0){
+        var activeEl = lyricEls[activeIdx];
+        activeEl.classList.add('active');
+        activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }
+
+  var WISH_KEY = 'nileWishes';
+  var wishForm = document.getElementById('wishForm');
+  var wishList = document.getElementById('wishList');
+
+  function loadWishes(){
+    try { var raw = localStorage.getItem(WISH_KEY); return raw ? JSON.parse(raw) : []; }
+    catch (e){ return []; }
+  }
+  function saveWishes(list){
+    try { localStorage.setItem(WISH_KEY, JSON.stringify(list)); } catch (e){ /* storage unavailable */ }
+  }
+  function escapeHtml(str){
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+  function renderWishes(){
+    var wishes = loadWishes();
+    if (!wishes.length){
+      wishList.innerHTML = '<p class="wish-empty">Be the first to leave a wish for Ahmed & Judy.</p>';
+      return;
+    }
+    wishList.innerHTML = wishes.slice().reverse().map(function(w){
+      return '<div class="wish-item"><div class="wish-name">' + escapeHtml(w.name) + '</div><div class="wish-msg">' + escapeHtml(w.message) + '</div></div>';
+    }).join('');
+  }
+  renderWishes();
+
+  wishForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('wishName').value.trim();
+    var message = document.getElementById('wishMsg').value.trim();
+    if (!name || !message) return;
+    var wishes = loadWishes();
+    wishes.push({ name: name, message: message, date: Date.now() });
+    saveWishes(wishes);
+    renderWishes();
+    wishForm.reset();
+  });
+
+  var qrFab = document.getElementById('qrFab');
+  var qrModal = document.getElementById('qrModal');
+  var qrClose = document.getElementById('qrClose');
+  var qrImg = document.getElementById('qrImg');
+  var qrLoaded = false;
+
+  function openQr(){
+    if (!qrLoaded){
+      var url = encodeURIComponent(window.location.href);
+      qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + url;
+      qrLoaded = true;
+    }
+    qrModal.classList.add('open');
+  }
+  function closeQr(){ qrModal.classList.remove('open'); }
+
+  qrFab.addEventListener('click', openQr);
+  qrClose.addEventListener('click', closeQr);
+  qrModal.addEventListener('click', function(e){ if (e.target === qrModal) closeQr(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeQr(); });
+
+})();
+</script>
 
 </body>
-
 </html>
